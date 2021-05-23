@@ -5,22 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
 @Data
 @Entity
-public class Staff {
-	
+public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name;
-	@OneToOne
-	@JoinColumn(name = "address_id")
-	private Address address;
-	@OneToOne
-	@JoinColumn(name = "account_id")
-	private Account account;
+	
+	private String content;
+	
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
 }
