@@ -102,12 +102,13 @@ public class AccountController {
 	public String register(Account account, Model model) {
 		if(accountDAO.findByUsername(account.getUsername())==null) {
 			accountDAO.save(account);
+			System.out.println("Đăng ký thành công");
 			model.addAttribute("message","Đăng ký thành công");
-			return "redirect:/login";
+			return "redirect:/login?success=true";
 		}
 		else {
 			model.addAttribute("message","Tài khoản đã tồn tại");
-			return "redirect:/register";
+			return "redirect:/register?error=true";
 		}
 		
 	}
