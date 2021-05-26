@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 								"/default",
 								"/api/**",
 								"/",
+								"/register",
 								"/search"
 								).permitAll()
 					.antMatchers("/store/**").hasRole("STORE")
@@ -79,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.formLogin()
 					.loginPage("/login")
 					.loginProcessingUrl("/j_spring_security_check")
-					.usernameParameter("userName")
+					.usernameParameter("username")
 					.passwordParameter("password")
 					.defaultSuccessUrl("/default")
 					.failureUrl("/login?error=true")
