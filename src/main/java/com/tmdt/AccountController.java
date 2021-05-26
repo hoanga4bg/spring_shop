@@ -92,7 +92,7 @@ public class AccountController {
 	
 	@GetMapping("/register")
 	public String registerForm(Model model) {
-		model.addAttribute("user",new Account());
+		model.addAttribute("account",new Account());
 		model.addAttribute("message","");
 		return "register";
 	}
