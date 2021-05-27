@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 								"/default",
 								"/api/**",
 								"/",
+								"/detail",
 								"/register",
 								"/search"
 								).permitAll()

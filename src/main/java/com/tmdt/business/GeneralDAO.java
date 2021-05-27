@@ -5,8 +5,8 @@ import java.util.List;
 public interface GeneralDAO<T> {
 	List<T> findAll();
 	T save(T t);
-	T findOneById(int id);
-	void delete(int id);
-	T update(int id,T t);
+	T findOneById(long id);
+	void delete(long id);
+	T update(long id,T t);
 
 }

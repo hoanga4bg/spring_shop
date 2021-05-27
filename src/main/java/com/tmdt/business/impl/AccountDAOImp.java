@@ -36,19 +36,19 @@ public class AccountDAOImp implements AccountDAO{
 	}
 
 	@Override
-	public Account findOneById(int id) {
+	public Account findOneById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Account update(int id, Account t) {
+	public Account update(long id, Account t) {
 		// TODO Auto-generated method stub
 		return null;
 	}

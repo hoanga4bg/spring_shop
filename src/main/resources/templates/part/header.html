@@ -1,26 +1,20 @@
 <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" th:href="@{/}" style="font-weight: bold">Trang chủ</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sản phẩm</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Sách</a></li>
-
-                                <li><a class="dropdown-item" href="#!">Đồ điện tử</a></li>
-                                <li><a class="dropdown-item" href="#!">Quần áo</a></li>
-                            </ul>
-                        </li>
-                   	
-                       	 <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/login}">Đăng nhập</a></li>
-                        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/register}">Đăng ký</a></li>
+                        
+                   		<li class="nav-item" ><a class="nav-link" th:href="@{/}" style="font-weight: bold">Sách</a></li>
+                   		<li class="nav-item" ><a class="nav-link" th:href="@{/}" style="font-weight: bold">Đồ điện tử</a></li>
+                   		<li class="nav-item" ><a class="nav-link" th:href="@{/}" style="font-weight: bold">Quần áo</a></li>	
+                       	<li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/login}" style="font-weight: bold">Đăng nhập</a></li>
+                        <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/register}" style="font-weight: bold">Đăng ký</a></li>
                         
                         <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authentication="principal.name"></a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authentication="principal.name" style="font-weight: bold; color: green"></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/info}">Thông tin cá nhân</a></li>
+                                <li><a class="dropdown-item" th:href="@{/info}" >Thông tin cá nhân</a></li>
                                 <li><a class="dropdown-item" href="#!">Lịch sử đặt hàng</a></li>
                                 <li><hr class="dropdown-divider" /></li>
      

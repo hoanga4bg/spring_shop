@@ -28,7 +28,7 @@ import com.tmdt.repository.BookRepository;
 import com.tmdt.repository.CustomerRepository;
 
 @Controller
-@RequestMapping
+
 public class AccountController {
 	@Autowired
 	private BookRepository bookRepo;
@@ -59,12 +59,9 @@ public class AccountController {
 		}
 	}
 	
-	@GetMapping("/")
-	public String home() {
-		return "index";
-	}
 	
-	@GetMapping("/login")
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(Model model) {
 		
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -81,7 +78,7 @@ public class AccountController {
 	
 	
 	
-	@GetMapping("/logout")
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    if (auth != null) {
@@ -90,7 +87,7 @@ public class AccountController {
 	    return "redirect:/";
 	}
 	
-	@GetMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerForm(Model model) {
 		model.addAttribute("account",new Account());
 		model.addAttribute("message","");
@@ -98,7 +95,7 @@ public class AccountController {
 	}
 	
 	
-	@PostMapping("/register")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(Account account, Model model) {
 		if(accountDAO.findByUsername(account.getUsername())==null) {
 			accountDAO.save(account);
