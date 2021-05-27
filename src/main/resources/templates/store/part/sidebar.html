@@ -1,0 +1,45 @@
+<ul class="nav" id="side-menu">
+                        	<li>
+                        		<a th:href="@{/admin/info?message}"><i class="fa fa-info-circle fa-fw"></i>Thông tin đăng nhập</a>
+                        	</li>
+                        	
+                        	<li>
+                                <a><i class="fa fa-files-o fa-fw"></i>Quản lý sách<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a th:href="@{/store/book}">Kho hàng</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/store/book/create}">Thêm sách</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                            
+                            <li>
+                                <a><i class="fa fa-files-o fa-fw"></i>Quản lý quần áo<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a th:href="@{/store/clothes}">Kho hàng</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/store/clothes/create}">Thêm quần áo</a>
+                                    </li>
+                                   
+                                </ul>
+                            </li>
+                            
+                             <li>
+                                <a><i class="fa fa-files-o fa-fw"></i>Quản lý đồ điện tử<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a th:href="@{/store/electronic}">Kho hàng</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/store/electronic/create}">Thêm mặt hàng đồ điện tử</a>
+                                    </li>
+                                   
+                                </ul>
+                            </li>
+                           
+</ul>
