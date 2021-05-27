@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tmdt.business.CustomerDAO;
 import com.tmdt.business.ProductDAO;
 import com.tmdt.model.*;
 
@@ -21,7 +23,8 @@ import com.tmdt.model.*;
 public class ProductController {
 	@Autowired
 	private ProductDAO proDAO;
-	
+	@Autowired
+	private CustomerDAO customerDAO;
 	@GetMapping
 	public String home(Model model) {
 		List<Product> list=new ArrayList<Product>();
@@ -38,6 +41,10 @@ public class ProductController {
 	public String detail(Model model,@RequestParam("id") String id) {
 		Product p=new Product();
 		p=proDAO.findOneById(Long.parseLong(id));
+		
+		List<Comment> list=new ArrayList<Comment>();
+		list=proDAO.getComment(p);
+		model.addAttribute("list", list);
 		model.addAttribute("product", p);
 		return "detail";
 	}
@@ -73,5 +80,21 @@ public class ProductController {
 		
 		model.addAttribute("list",list);
 		return "index";
+	}
+	
+	@PostMapping("/comment")
+	public String comment(@RequestParam("comment") String comment, @RequestParam("product") String id) {
+		Product p=new Product();
+		p=proDAO.findOneById(Long.parseLong(id));
+		Comment cmt=new Comment();
+		cmt.setContent(comment);
+		Customer customer=customerDAO.getCustomer();
+		//System.out.print(customer.getId());
+		cmt.setCustomer(customer);
+		cmt.setProduct(p);
+		
+		proDAO.addComment(cmt);
+		return "redirect:/detail?id="+id;
+		
 	}
 }

@@ -7,6 +7,8 @@ import com.tmdt.model.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
-	public Customer findOneByAccount(Account account);
+
+
+	public Customer findByAccount(Account account);
 
 }

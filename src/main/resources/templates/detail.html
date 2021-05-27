@@ -65,6 +65,51 @@
 			</div>
 		</div>
 		</div>
+		<br/>
+		<br/>
+		<div class="container" >
+		    <div class="row">
+		        <div class="panel panel-default widget">
+		          	
+		            <div class="panel-body">
+		                <ul class="list-group">
+		                    <li class="list-group-item" th:each="comment : ${list}">
+		                        <div class="row" >
+		                            <div class="col-xs-2 col-md-1">
+		                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+		                            <div class="col-xs-10 col-md-11" >
+		                                <div>
+		                                   
+		                                    <div class="mic-info">
+		                                        <b>Người viết:</b> <b th:text="${comment.customer.account.name}" style="color:green"></b>
+		                                    </div>
+		                                </div>
+		                                <div class="comment-text" >
+		                                    <span th:text="${comment.content}"></span>
+		                                </div>
+		                                
+		                        </div>
+		                    </li>
+		                    
+		                </ul>
+		                
+		            </div>
+		            <form th:action="@{/comment}" method="POST" sec:authorize="isAuthenticated()">
+		           	 <input type="hidden" name="product" th:value="${product.id}"/>
+				      <div class="form-group">
+						
+				        <textarea name="comment" class="form-control" rows="3" placeholder="Nhập bình luận..."></textarea>
+				      </div>
+				      <button type="submit" class="btn btn-primary " >Bình luận</button>
+   					 </form>
+		        </div>
+		    </div>
+		</div>
+		
+		<br/>
+		<br/>
+		<br/>
+		<br/>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>

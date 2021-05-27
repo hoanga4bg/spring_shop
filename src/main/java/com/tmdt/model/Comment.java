@@ -29,6 +29,7 @@ public class Comment {
 	private Product product;
 	
 	
-	@ManyToMany(targetEntity = Customer.class)
-	private List<Customer> customers;
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 }

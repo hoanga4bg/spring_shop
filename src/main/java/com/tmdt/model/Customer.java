@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
@@ -24,9 +25,13 @@ public class Customer {
 	@OneToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
+	
+	
 	@OneToOne
 	@JoinColumn(name = "account_id")
 	private Account account;
 	
+	@OneToMany(mappedBy = "customer")
+	private List<Comment> comments;
 
 }

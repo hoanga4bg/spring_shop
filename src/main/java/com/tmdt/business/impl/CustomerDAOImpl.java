@@ -27,7 +27,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username=((MyUserDetails) principal).getUsername() ;
 		Account account=accountRepo.findOneByUsername(username);
-		Customer customer=customerRepo.findOneByAccount(account);
+		System.out.print(account.getUsername());
+		Customer customer=customerRepo.findByAccount(account);
+		System.out.print(customer.getId());
 		return customer;
 	}
 

@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import com.tmdt.business.ProductDAO;
 import com.tmdt.model.Book;
 import com.tmdt.model.Clothes;
+import com.tmdt.model.Comment;
 import com.tmdt.model.Electronic;
 import com.tmdt.model.Product;
 import com.tmdt.repository.BookRepository;
 import com.tmdt.repository.ClothesRepository;
+import com.tmdt.repository.CommentRepository;
 import com.tmdt.repository.ElectronicRepository;
 import com.tmdt.repository.ProductRepository;
 
@@ -28,6 +30,9 @@ public class ProductDAOImpl implements ProductDAO{
 	private BookRepository bookRepo;
 	@Autowired
 	private ElectronicRepository elecRepo;
+	
+	@Autowired
+	private CommentRepository commentRepo;
 	@Override
 	public List<Product> findAll() {
 		
@@ -75,6 +80,18 @@ public class ProductDAOImpl implements ProductDAO{
 	public List<Clothes> findAllClothes() {
 		// TODO Auto-generated method stub
 		return cloRepo.findAll();
+	}
+
+	@Override
+	public void addComment(Comment comment) {
+		commentRepo.save(comment);
+		
+	}
+
+	@Override
+	public List<Comment> getComment(Product p) {
+		List<Comment> list=commentRepo.findByProduct(p);
+		return list;
 	}
 
 }
