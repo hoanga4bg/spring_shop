@@ -1,11 +1,17 @@
 package com.tmdt.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+
 
 import lombok.Data;
 
@@ -21,4 +27,8 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	
+	
+	@ManyToMany(targetEntity = Customer.class)
+	private List<Customer> customers;
 }

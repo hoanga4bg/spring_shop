@@ -36,9 +36,10 @@
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
-                    <div class="col mb-5" th:each="product : ${list}">
-                        <div class="card h-100">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"  >
+                
+                    <div class="col mb-5" th:if="${list}" th:each="product : ${list}">
+                        <div class="card h-100" >
                             <!-- Product image-->
                             <img class="card-img-top" th:src="${product.image}" alt="..." style="height: 80%; width: 100%;"/>
                             <!-- Product details-->
@@ -55,8 +56,8 @@
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{/detail(id=${product.id})}">Xem chi tiết</a></div>
                             </div>
                         </div>
+
                     </div>
-                    
                     </div>
             </div>
             

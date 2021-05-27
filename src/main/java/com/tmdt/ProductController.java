@@ -26,7 +26,7 @@ public class ProductController {
 	public String home(Model model) {
 		List<Product> list=new ArrayList<Product>();
 		list=proDAO.findAll();
-		System.out.print(list.toString());
+
 		Collections.reverse(list);
 		
 		model.addAttribute("list",list);
@@ -40,5 +40,38 @@ public class ProductController {
 		p=proDAO.findOneById(Long.parseLong(id));
 		model.addAttribute("product", p);
 		return "detail";
+	}
+	
+	
+	@GetMapping("/book")
+	public String book(Model model) {
+		List<Book> list=new ArrayList<Book>();
+		list=proDAO.findAllBook();
+
+		Collections.reverse(list);
+		
+		model.addAttribute("list",list);
+		return "index";
+	}
+	
+	@GetMapping("/electronic")
+	public String electronic(Model model) {
+		List<Electronic> list=new ArrayList<Electronic>();
+		list=proDAO.findAllElectronic();
+
+		Collections.reverse(list);
+		
+		model.addAttribute("list",list);
+		return "index";
+	}
+	@GetMapping("/clothes")
+	public String closthes(Model model) {
+		List<Clothes> list=new ArrayList<Clothes>();
+		list=proDAO.findAllClothes();
+
+		Collections.reverse(list);
+		
+		model.addAttribute("list",list);
+		return "index";
 	}
 }

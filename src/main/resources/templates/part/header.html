@@ -5,9 +5,9 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         
                         
-                   		<li class="nav-item" ><a class="nav-link" th:href="@{/}" style="font-weight: bold">Sách</a></li>
-                   		<li class="nav-item" ><a class="nav-link" th:href="@{/}" style="font-weight: bold">Đồ điện tử</a></li>
-                   		<li class="nav-item" ><a class="nav-link" th:href="@{/}" style="font-weight: bold">Quần áo</a></li>	
+                   		<li class="nav-item" ><a class="nav-link" th:href="@{/book}" style="font-weight: bold">Sách</a></li>
+                   		<li class="nav-item" ><a class="nav-link" th:href="@{/electronic}" style="font-weight: bold">Đồ điện tử</a></li>
+                   		<li class="nav-item" ><a class="nav-link" th:href="@{/clothes}" style="font-weight: bold">Quần áo</a></li>	
                        	<li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/login}" style="font-weight: bold">Đăng nhập</a></li>
                         <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="nav-link" th:href="@{/register}" style="font-weight: bold">Đăng ký</a></li>
                         

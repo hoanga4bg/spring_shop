@@ -1,5 +1,7 @@
 package com.tmdt.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,4 +27,6 @@ public class Customer {
 	@OneToOne
 	@JoinColumn(name = "account_id")
 	private Account account;
+	
+
 }
