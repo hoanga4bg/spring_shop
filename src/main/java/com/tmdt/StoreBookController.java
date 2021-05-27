@@ -90,5 +90,31 @@ public class StoreBookController {
 		bookRepository.deleteById(Long.parseLong(id));
 		return "redirect:/store/book";
 	}
+	
+	@GetMapping("/author")
+	public String createNewAuthor(Model model) {
+		Author author = new Author();
+		model.addAttribute("author", author);
+		return "store/book/author";
+	}
+	
+	@PostMapping("/author")
+	public String saveAuthor(Author author) {
+		authorRepository.save(author);
+		return "redirect:/store/book";
+	}
+	
+	@GetMapping("/category")
+	public String createNewCategory(Model model) {
+		Category category = new Category();
+		model.addAttribute("category", category);
+		return "store/book/category";
+	}
+	
+	@PostMapping("/category")
+	public String savaCategory(Category category) {
+		categoryRepository.save(category);
+		return "redirect:/store/book";
+	}
 
 }

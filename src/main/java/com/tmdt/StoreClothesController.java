@@ -86,6 +86,30 @@ public class StoreClothesController {
 		return "store/clothes/form";
 	}
 	
+	@GetMapping("/brand")
+	public String createNewBrand(Model model) {
+		model.addAttribute("brand", new Brand());
+		return "store/clothes/brand";
+	}
+	
+	@PostMapping("/brand")
+	public String saveBrand(Brand brand) {
+		brandRepository.save(brand);
+		return "redirect:/store/clothes";
+	}
+	
+	@GetMapping("/material")
+	public String createNewMaterial(Model model) {
+		model.addAttribute("material", new Material());
+		return "store/clothes/material";
+	}
+	
+	@PostMapping("/material")
+	public String saveMaterial(Material material) {
+		materialRepository.save(material);
+		return "redirect:/store/clothes";
+	}
+	
 	
 
 }

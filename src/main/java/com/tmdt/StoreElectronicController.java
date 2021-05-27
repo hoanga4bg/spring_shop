@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tmdt.model.Brand;
 import com.tmdt.model.Electronic;
+import com.tmdt.model.Material;
 import com.tmdt.model.Supplier;
 import com.tmdt.model.Types;
 import com.tmdt.repository.ElectronicRepository;
@@ -80,6 +82,30 @@ public class StoreElectronicController {
 	@GetMapping("/delete")
 	public String eleteElectronic(@RequestParam("id") String id) {
 		electronicRepository.deleteById(Long.parseLong(id));
+		return "redirect:/store/electronic";
+	}
+	
+	@GetMapping("/type")
+	public String createNewType(Model model) {
+		model.addAttribute("type", new Types());
+		return "store/electronic/type";
+	}
+	
+	@PostMapping("/type")
+	public String saveType(Types type) {
+		typeRepository.save(type);
+		return "redirect:/store/electronic";
+	}
+	
+	@GetMapping("/supplier")
+	public String createNewSupplier(Model model) {
+		model.addAttribute("supplier", new Supplier());
+		return "store/electronic/supplier";
+	}
+	
+	@PostMapping("/supplier")
+	public String saveSupplier(Supplier supplier) {
+		supplierRepository.save(supplier);
 		return "redirect:/store/electronic";
 	}
 
