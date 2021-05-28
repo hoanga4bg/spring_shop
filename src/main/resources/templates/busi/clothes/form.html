@@ -38,6 +38,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                
+                <ul class="nav navbar-nav navbar-left navbar-top-links">
+                    <li><a th:href="@{/busi}"><i class="fa fa-home fa-fw"></i>Trang chủ</a></li>
+                </ul>
+                
+                <ul class="nav navbar-right navbar-top-links">
+                    <li th:insert="busi/part/loginInfo"></li>
+                </ul>
 
                
 			<!-- /.navbar-top-links -->

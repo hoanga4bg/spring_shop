@@ -20,7 +20,7 @@
 
         <!-- Custom Fonts -->
         <link th:href="@{/css/font-awesome.min.css}" href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
+
     </head>
     <body>
 
@@ -28,8 +28,8 @@
 
             <!-- Navigation -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="navbar-header navbar-brand">
-                    Quản lý kho hàng
+                <div class="navbar-header">
+                    <a class="navbar-brand" th:href="@{/}">Accounting</a>
                 </div>
 
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,77 +38,83 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
-                 <ul class="nav navbar-nav navbar-left navbar-top-links">
-                    <li><a th:href="@{/store}"><i class="fa fa-home fa-fw"></i>Trang chủ</a></li>
-                </ul>
-                
-                <ul class="nav navbar-right navbar-top-links">
-                    <li th:insert="store/part/loginInfo"></li>
-                </ul>
 
                
-			<!-- /.navbar-top-links -->
+                <ul class="nav navbar-right navbar-top-links">
+            
+                    <li th:insert="store/part/loginInfo"></li>
+                </ul>
+                <!-- /.navbar-top-links -->
 
-			<div class="navbar-default sidebar" role="navigation">
-				<div class="sidebar-nav navbar-collapse">
-					<div th:insert="store/part/sidebar"></div>
-				</div>
-				<!-- /.sidebar-collapse -->
-			</div>
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <div th:insert="store/part/sidebar"></div>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
                 <!-- /.navbar-static-side -->
             </nav>
 
-	
-	<!-- Page Content -->
+            <!-- Page Content -->
             <div id="page-wrapper">
             	
-                <div class="container-fluid mt-1">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-12">
-                         <h1 class="page-header">Thêm loại sản phẩm</h1>
-                           
+                            <h1 class="page-header">Thông tin cá nhân</h1>
                         </div>
                         <!-- /.col-lg-12 -->
                     </div>
                     <!-- /.row -->
-
+                </div>
                 <!-- /.container-fluid -->
                 <div class="card-body" >
-				<form th:action="@{/store/electronic/type}" th:object="${type}" method="POST">
-				
-				
-				<input type="hidden" name="id" th:field="*{id}">
-				
-				<br/>
-				<br/>
-				<br/>
-				
+				<form th:action="@{/store}" th:object="${account}" method="POST">
 				<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="bmd-label-floating">Loại sản phẩm</label> <input
-									type="text" class="form-control" th:field="*{name}">
-							</div>
+				<input type="hidden" th:field="*{id}" >
+				<input type="hidden" th:field="*{name}" >
+				<input type="hidden" th:field="*{role}" >
+					
+					<div class="col-md-3">
+						<div class="form-group">
+							<label class="bmd-label-floating">Tên tài khoản</label> <input
+								type="text" th:field="*{username}"  class="form-control">
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary pull-center" onclick="alertSuccess()">Xác nhận</button>
-					<div class="clearfix"></div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label class="bmd-label-floating">Mật khẩu</label> <input
+								type="text" class="form-control" th:field="*{password}">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<label class="bmd-label-floating"></label><button
+								type="submit" class="btn btn-primary pull-center">Đổi
+								mật khẩu</button>
+					</div>
+				</div>
 				</form>
+				
 			</div>
-			</div>
+				
+				
+				
+				
             </div>
             <!-- /#page-wrapper -->
 
-
-
-
-
-           
         </div>
         <!-- /#wrapper -->
 	
-	
+		<script>
+			function alertSuccess() {
+			  alert("Cập nhật thông tin thành công");
+			}
+		</script>
+		
         <!-- jQuery -->
         <script th:src="@{/js/jquery.min.js}"></script>
 

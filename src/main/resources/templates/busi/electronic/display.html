@@ -31,13 +31,21 @@
                 <div class="navbar-header navbar-brand">
                     Nhân viên kinh doanh
                 </div>
-
+                
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar">hi</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                
+                <ul class="nav navbar-nav navbar-left navbar-top-links">
+                    <li><a th:href="@{/busi}"><i class="fa fa-home fa-fw"></i>Trang chủ</a></li>
+                </ul>
+                
+                <ul class="nav navbar-right navbar-top-links">
+                    <li th:insert="busi/part/loginInfo"></li>
+                </ul>
 
                
 			<!-- /.navbar-top-links -->
@@ -106,7 +114,7 @@
 													<td>
 													
 													<a th:href=@{/busi/electronic/form(id=${elec.id})}>
-															<button class="btn btn-danger pull-center">Thêm ảnh/khuyến mãi
+															<button class="btn btn-primary pull-center">Thêm ảnh/khuyến mãi
 															
 																</button>
 													</a>
