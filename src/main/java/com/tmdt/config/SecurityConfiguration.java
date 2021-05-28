@@ -74,10 +74,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 								"/register",
 								"/search"
 								).permitAll()
-					.antMatchers("/store/**").hasRole("STORE")
-					.antMatchers("/**").hasRole("USER")
-					.antMatchers("/sale/**").hasRole("SALE")
-					.antMatchers("/busi/**").hasRole("BUSI")
+					.antMatchers("/busi/**").access("hasRole('ROLE_BUSI')")
+					.antMatchers("/store/**").access("hasRole('ROLE_STORE')")
+					.antMatchers("/**").access("hasRole('ROLE_USER')")
+					.antMatchers("/sale/**").access("hasRole('ROLE_SALE')")
 					.and()
 					.exceptionHandling().accessDeniedPage("/logout")	
 					.and()
