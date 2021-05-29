@@ -10,5 +10,9 @@ import com.tmdt.model.ItemInCart;
 public interface ItemInCartRepository extends JpaRepository<ItemInCart, Long>{
 
 	public List<ItemInCart> findByCartAndStatus(Cart cart, boolean b);
+	
+	public ItemInCart findOneById(Long id);
+	
+	public List<ItemInCart> findByCart(Cart cart);
 
 }

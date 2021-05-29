@@ -1,5 +1,5 @@
 <div class="dropdown">
-  <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown">Store
+  <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" sec:authentication="principal.name">
   <span class="caret"></span></button>
   <ul class="dropdown-menu">
     <li><a th:href="@{/store/info}">Thông tin đăng nhập</a></li>

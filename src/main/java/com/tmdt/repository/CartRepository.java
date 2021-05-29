@@ -8,5 +8,6 @@ import com.tmdt.model.Customer;
 public interface CartRepository extends JpaRepository<Cart, Long>{
 
 	public Cart findOneByCustomer(Customer cus);
+	
 
 }
