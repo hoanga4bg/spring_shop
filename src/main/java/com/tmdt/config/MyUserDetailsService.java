@@ -29,7 +29,7 @@ public class MyUserDetailsService implements UserDetailsService{
 		//System.out.println(username);
 		
 		Account account=accountRepo.findOneByUsername(username);
-		System.out.print(account.getRole());
+		
 //		System.out.print(user.getPassWord());
 		if(account==null) {
 			throw new UsernameNotFoundException("not found : "+username);

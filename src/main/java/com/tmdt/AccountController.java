@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -39,23 +40,27 @@ public class AccountController {
 	@Autowired
 	private AccountDAO accountDAO;
 	@RequestMapping(value = "/default", method = RequestMethod.GET)
-	public String defaultHome() {
+	public String defaultHome(Authentication authentication) {
 		Collection<? extends GrantedAuthority> authorities;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         authorities = auth.getAuthorities();
         String myRole = authorities.toArray()[0].toString();
-//        System.out.println(myRole);
-		if(myRole.equals("ROLE_USER")) {
+        
+        System.out.println(myRole);
+		if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
 			return "redirect:/";
 		} 
-		else if(myRole.equals("ROLE_BUSI")) {
+		else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_BUSI"))) {
 			return "redirect:/busi";
 		}
-		else if(myRole.equals("ROLE_STORE")) {
+		else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_STORE"))) {
 			return "redirect:/store";
 		}
-		else {
+		else if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_SALE"))){
 			return "redirect:/sale";
+		}
+		else {
+			return "redirect:/login";
 		}
 	}
 	
