@@ -34,4 +34,6 @@ public class Customer {
 	@OneToMany(mappedBy = "customer")
 	private List<Comment> comments;
 
+	@OneToMany(mappedBy = "customer")
+	private List<Loves> loves;
 }
