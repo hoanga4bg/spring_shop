@@ -34,4 +34,46 @@ public class CartDAOImpl implements CartDAO{
 		return list;
 	}
 
+	@Override
+	public List<Cart> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Cart save(Cart t) {
+		
+		return cartRepo.save(t);
+	}
+
+	@Override
+	public Cart findOneById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Cart update(long id, Cart t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addToCart(ItemInCart iic) {
+		itemRepo.save(iic);
+		
+	}
+
+	@Override
+	public ItemInCart getItemInCartById(Long id) {
+		
+		return itemRepo.findOneById(id);
+	}
+
 }

@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.tmdt.business.AccountDAO;
+import com.tmdt.business.CartDAO;
+import com.tmdt.business.CustomerDAO;
 import com.tmdt.model.Account;
 import com.tmdt.model.Book;
+import com.tmdt.model.Cart;
 import com.tmdt.model.Customer;
 import com.tmdt.model.FullName;
 import com.tmdt.repository.AccountRepository;
@@ -33,12 +36,16 @@ import com.tmdt.repository.CustomerRepository;
 public class AccountController {
 	@Autowired
 	private BookRepository bookRepo;
+	@Autowired
+	private CustomerRepository cusRepo;
 //	@Autowired
 //	private AccountRepository accountRepo;
 //	@Autowired
 //	private CustomerRepository customerRepo;
 	@Autowired
 	private AccountDAO accountDAO;
+	@Autowired
+	private CartDAO cartDAO;
 	@RequestMapping(value = "/default", method = RequestMethod.GET)
 	public String defaultHome(Authentication authentication) {
 		Collection<? extends GrantedAuthority> authorities;
@@ -104,7 +111,13 @@ public class AccountController {
 	public String register(Account account, Model model) {
 		if(accountDAO.findByUsername(account.getUsername())==null) {
 			accountDAO.save(account);
-			System.out.println("Đăng ký thành công");
+			Account acc=accountDAO.findByUsername(account.getUsername());
+			Customer cus=cusRepo.findByAccount(acc);
+			Cart cart=new Cart();
+			cart.setCustomer(cus);
+			cartDAO.save(cart);
+			
+
 			model.addAttribute("message","Đăng ký thành công");
 			return "redirect:/login?success=true";
 		}
