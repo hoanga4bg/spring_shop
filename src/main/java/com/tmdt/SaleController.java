@@ -54,11 +54,11 @@ public class SaleController {
 	@GetMapping
 	public String sale(Model model) {
 
-		List<Orders> list=orderDAO.findAll();
+		List<Orders> orders =orderDAO.findAll();
 
-		model.addAttribute("list", list);
-
-		return "sale/display";
+		model.addAttribute("orders", orders);
+		model.addAttribute("amount", orders.size());
+		return "sale/index";
 	}
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
