@@ -16,8 +16,6 @@ public interface ItemInCartRepository extends JpaRepository<ItemInCart, Long>{
 	
 	public List<ItemInCart> findByCart(Cart cart);
 	
-	public List<ItemInCart> findByOrders(Orders orders);
-	
-	List<ItemInCart> findByCreateDateBetween(Date date1,Date date2);
+
 
 }
