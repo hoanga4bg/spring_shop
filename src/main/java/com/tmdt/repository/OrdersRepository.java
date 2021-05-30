@@ -8,6 +8,7 @@ import com.tmdt.model.ItemInCart;
 import com.tmdt.model.Orders;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long>{
+	public Orders findOneById(Long id);
 
 	public Orders findOneById(long id);
 
