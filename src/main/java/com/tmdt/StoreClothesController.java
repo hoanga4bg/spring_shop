@@ -61,6 +61,7 @@ public class StoreClothesController {
 		material = materialRepository.findOneById(clothes.getMaterial().getId());
 		clothes.setBrand(brand);
 		clothes.setMaterial(material);
+		clothes.setSaleOff(0.0);
 		clothesRepository.save(clothes);
 		return "redirect:/store/clothes";
 	}

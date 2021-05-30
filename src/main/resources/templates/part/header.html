@@ -14,8 +14,8 @@
                         <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authentication="principal.name" style="font-weight: bold; color: green"></a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" th:href="@{/info}" >Thông tin cá nhân</a></li>
-                                <li><a class="dropdown-item" href="#!">Lịch sử đặt hàng</a></li>
+                                <li><a class="dropdown-item" th:href="@{/changepass}" >Đổi mật khẩu</a></li>
+                                <li><a class="dropdown-item" th:href="@{/order}">Lịch sử đặt hàng</a></li>
                                 <li><hr class="dropdown-divider" /></li>
      
                                 <li><a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a></li>

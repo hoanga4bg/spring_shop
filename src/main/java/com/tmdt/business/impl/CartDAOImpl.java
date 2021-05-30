@@ -1,5 +1,6 @@
 package com.tmdt.business.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class CartDAOImpl implements CartDAO{
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
+		itemRepo.deleteById(id);;
 		
 	}
 
@@ -75,5 +76,13 @@ public class CartDAOImpl implements CartDAO{
 		
 		return itemRepo.findOneById(id);
 	}
+
+	@Override
+	public List<ItemInCart> getOrderedByCart(Cart cart) {
+		List<ItemInCart> list=itemRepo.findByCartAndStatus(cart, false);
+		return list;
+	}
+
+	
 
 }

@@ -49,8 +49,8 @@ public class AccountDAOImp implements AccountDAO{
 
 	@Override
 	public Account update(long id, Account t) {
-		// TODO Auto-generated method stub
-		return null;
+		accountRepo.save(t);
+		return t;
 	}
 
 	@Override

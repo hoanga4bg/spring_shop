@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tmdt.config.MyUserDetails;
 import com.tmdt.business.AccountDAO;
 import com.tmdt.business.CartDAO;
 import com.tmdt.business.CustomerDAO;
@@ -127,4 +129,28 @@ public class AccountController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/changepass", method = RequestMethod.GET)
+	public String changepass() {
+		return "change";
+	}
+	
+	@RequestMapping(value = "/changepass", method = RequestMethod.POST)
+	public String changePass(@RequestParam("old") String oldPass,
+							@RequestParam("newpass") String newPass) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String password=((MyUserDetails) principal).getPassword();
+		String username=((MyUserDetails) principal).getUsername();
+		System.out.println(newPass);
+		Account account=accountDAO.findByUsername(username);
+		if(oldPass.equals(password)==true) {
+			account.setPassword(newPass);
+			accountDAO.update(0,account);
+			return "redirect:/changepass?success=true";
+		}
+		else {
+			return "redirect:/changepass?error=true";
+		}
+	}
+	
 }

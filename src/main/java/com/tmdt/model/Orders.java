@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -20,8 +21,12 @@ public class Orders {
 	private Long id;
 	
 	private boolean status;
-	@OneToMany(mappedBy = "orders")
-	private List<ItemInCart> list;
+	private double totalPrice;
+	private String address;
+	private String phone;
+	@OneToOne
+	@JoinColumn(name = "item_id")
+	private ItemInCart item;
 	
 	@ManyToOne
 	@JoinColumn(name="payment_id")

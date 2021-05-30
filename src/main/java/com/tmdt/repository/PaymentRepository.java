@@ -6,4 +6,6 @@ import com.tmdt.model.Payment;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long>{
 
+	public Payment findOneById(long id);
+
 }

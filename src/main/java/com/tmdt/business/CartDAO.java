@@ -12,4 +12,6 @@ public interface CartDAO extends GeneralDAO<Cart>{
 	public void addToCart(ItemInCart iic);
 	
 	public ItemInCart getItemInCartById(Long id);
+	
+	public List<ItemInCart> getOrderedByCart(Cart cart);
 }

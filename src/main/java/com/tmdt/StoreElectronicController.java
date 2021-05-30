@@ -61,6 +61,7 @@ public class StoreElectronicController {
 		Supplier sup = supplierRepository.findOneById(elec.getSupplier().getId());
 		elec.setType(type);
 		elec.setSupplier(sup);
+		elec.setSaleOff(0.0);
 		electronicRepository.save(elec);
 		return "redirect:/store/electronic";
 	}

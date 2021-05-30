@@ -17,7 +17,7 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	
+
 	@OneToMany(mappedBy = "payment")
 	private List<Orders> orders;
 }

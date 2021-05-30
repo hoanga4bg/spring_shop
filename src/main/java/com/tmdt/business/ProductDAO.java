@@ -16,4 +16,6 @@ public interface ProductDAO extends GeneralDAO<Product>{
 	public void addComment(Comment comment);
 	
 	public List<Comment> getComment(Product p);
+	
+	public List<Product> getProductByName(String name);
 }

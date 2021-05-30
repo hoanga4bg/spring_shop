@@ -33,9 +33,7 @@ public class ItemInCart {
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
 
-	@ManyToOne
-	@JoinColumn(name="orders_id")
-	private Orders orders;
+	
 	
 	
 	

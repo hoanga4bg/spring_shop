@@ -6,4 +6,6 @@ import com.tmdt.model.Shipment;
 
 public interface ShipmentRepository extends JpaRepository<Shipment, Long>{
 
+	public Shipment findOneById(long id);
+
 }

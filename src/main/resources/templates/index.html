@@ -25,12 +25,15 @@
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Shop in style</h1>
                  </div>
+                 <form th:action="@{search}" method="GET">
                   <div class="input-group">
-					  <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-					    aria-describedby="search-addon" />
-					  <button type="button" class="btn btn-outline-primary">Tìm kiếm</button>
+                  	
+					  <input type="text" class="form-control rounded" placeholder="Search" aria-label="Search"
+					    aria-describedby="search-addon" name="name" />
+					  <button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
+					 
 					</div>
-                
+                 </form>
             </div>
         </header>
         <!-- Section-->
@@ -41,6 +44,7 @@
                     <div class="col mb-5" th:if="${list}" th:each="product : ${list}">
                         <div class="card h-100" >
                             <!-- Product image-->
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" th:if="${product.saleOff}!=0">Sale</div>
                             <img class="card-img-top" th:src="${product.image}" alt="..." style="height: 80%; width: 100%;"/>
                             <!-- Product details-->
                             <div class="card-body p-4">
@@ -48,7 +52,10 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder" th:text="${product.name}"></h5>
                                     <!-- Product price-->
-                                    <span th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')} "></span>
+                                    <span th:if="${product.saleOff}==0" th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')} "></span>
+                                    <span th:unless="${product.saleOff}==0" th:text="${#numbers.formatDecimal(product.salePrice, 0, 'COMMA', 0, 'POINT')} " class="text-muted text-decoration-line-through"></span>
+                                    <br/>
+                                    <span th:unless="${product.saleOff}==0" th:text="${#numbers.formatDecimal(product.salePrice*(1-product.saleOff), 0, 'COMMA', 0, 'POINT')} " style="color: red" ></span>
                                 </div>
                             </div>
                             <!-- Product actions-->

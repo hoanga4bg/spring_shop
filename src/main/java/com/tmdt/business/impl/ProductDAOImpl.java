@@ -94,4 +94,10 @@ public class ProductDAOImpl implements ProductDAO{
 		return list;
 	}
 
+	@Override
+	public List<Product> getProductByName(String name) {
+		// TODO Auto-generated method stub
+		return proRepo.findByName(name);
+	}
+
 }

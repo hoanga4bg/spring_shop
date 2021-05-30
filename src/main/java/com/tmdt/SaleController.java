@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tmdt.business.OrderDAO;
 import com.tmdt.business.StoreDAO;
 import com.tmdt.model.Account;
 import com.tmdt.model.Cart;
 import com.tmdt.model.Customer;
 import com.tmdt.model.ItemInCart;
+import com.tmdt.model.Orders;
 import com.tmdt.repository.AccountRepository;
 import com.tmdt.repository.CartRepository;
 import com.tmdt.repository.CustomerRepository;
@@ -38,42 +40,27 @@ public class SaleController {
 	@Autowired
 	private StoreDAO storeDAO;
 	
+	@Autowired
+	private OrderDAO orderDAO;
 	
 	
 	@GetMapping
 	public String sale(Model model) {
-		List<ItemInCart> items = new ArrayList<ItemInCart>();
-		List<Account> accounts = new ArrayList<Account>();
-		accounts = accountRepository.findByRole("ROLE_USER");
-		items = itemRepo.findAll();
-		model.addAttribute("items", items);
-		model.addAttribute("amount", items.size());
-		model.addAttribute("accounts", accounts);
+		List<Orders> list=orderDAO.findAll();
+
+		model.addAttribute("list", list);
+
 		return "sale/display";
 	}
 	
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
-		ItemInCart items = itemRepo.findOneById(Long.parseLong(id));
-		items.setStatus(true);
-		itemRepo.save(items);
+		Orders order=orderDAO.findOneById(Long.parseLong(id));
+		order.setStatus(true);
+		orderDAO.save(order);
 		return "redirect:/sale";
 	}
-	
-	@GetMapping("/searchacc")
-	public String searchByAccount(@RequestParam("id") String id,Model model) {
-		Account account = accountRepository.findOneById(Long.parseLong(id));
-		Customer customer =  customerRepository.findByAccount(account);
-		Cart cart = cartRepository.findOneByCustomer(customer);
-		List<ItemInCart> items = itemRepo.findByCart(cart);
-		List<Account> accounts = new ArrayList<Account>();
-		accounts = accountRepository.findByRole("ROLE_USER");
-		model.addAttribute("items", items);
-		model.addAttribute("amount", items.size());
-		model.addAttribute("accounts", accounts);
-		return "sale/display";
-		
-	}
+
 	
 	@GetMapping("/info")
 	public String getInfo(Model model) {

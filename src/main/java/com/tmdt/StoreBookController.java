@@ -64,8 +64,9 @@ public class StoreBookController {
 		Category category = categoryRepository.findOneById(book.getCategory().getId());
 		book.setAuthor(author);
 		book.setCategory(category);
+		book.setSaleOff(0.0);
 		bookRepository.save(book);
-		bookRepository.save(book);
+
 		return "redirect:/store/book";
 	}
 	

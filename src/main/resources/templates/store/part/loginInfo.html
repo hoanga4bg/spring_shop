@@ -1,9 +1,17 @@
-<div class="dropdown">
-  <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" sec:authentication="principal.name">
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a th:href="@{/store/info}">Thông tin đăng nhập</a></li>
-    <li><a th:href="@{/logout}">Đăng xuất</a></li>
-    
-  </ul>
-</div>
+
+
+<li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown"  sec:authorize="isAuthenticated()">
+	    <i class="fa fa-user fa-fw"></i>
+	    <span sec:authentication="principal.name"></span>
+	    <b class="caret"></b>
+     </a>
+     <ul class="dropdown-menu dropdown-user">
+          <li>
+         	<li><a th:href="@{/store/info}">Thông tin đăng nhập</a></li>
+         </li>
+         <li class="divider"></li>
+         <li><a th:href="@{/logout}"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+         </li>
+        </ul>
+ </li>
