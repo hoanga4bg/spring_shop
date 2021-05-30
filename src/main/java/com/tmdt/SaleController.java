@@ -63,6 +63,7 @@ public class SaleController {
 		model.addAttribute("amount", orders.size());
 		return "sale/index";
 	}
+
 	
 	
 	@GetMapping("/detail")
@@ -87,6 +88,7 @@ public class SaleController {
 		return "sale/index";
 	}
 	
+
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
 		Orders order=orderDAO.findOneById(Long.parseLong(id));
@@ -109,7 +111,6 @@ public class SaleController {
 		accountRepository.save(account);
 		return "redirect:/sale/info";
 	}
-	
 	@GetMapping("/searchacc")
 	public String searchByAccount(Model model,@RequestParam("id") String id) {
 		Account account = accountRepository.findOneById(Long.parseLong(id));
@@ -180,5 +181,4 @@ public class SaleController {
 		
 		return "sale/index";
 	}
-
 }
