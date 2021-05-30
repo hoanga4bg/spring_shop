@@ -71,7 +71,7 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Danh sách các đơn hàng</h1>
+						<h1 class="page-header">Xác nhận đơn hàng</h1>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
@@ -81,39 +81,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 
-								<div class="dropdown">
-									<button class="btn btn-primary dropdown-toggle" type="button"
-										data-toggle="dropdown">
-										Tài khoản<span class="caret"></span>
-									</button>
-									<ul class="dropdown-menu scrollable-menu">
-									<th:block th:each="account : ${accounts}">
-									<li><a th:href="@{/sale/searchacc(id=${account.id})}">[[${account.username}]]</a></li>
-									</th:block>
-									</ul>
-								</div>
+								
 
 							</div>
 							<div class="panel-heading">
-							
-							
-										<form th:action="@{/sale/search}" method="GET">
-											<span><input type="submit" value="Tìm kiếm" class="btn btn-primary"></span>
-												<span>
-												<label class="bmd-label-floating">Ngày bắt đầu</label>
-												<input type="date" value="" name="startdate"
-													title="chọn ngày bắt đầu muốn tìm" maxlength="200">
-												
-												</span>
-												<span>
-												<label class="bmd-label-floating">Ngày kết thúc</label>
-												
-												<td><input type="date" value="" name="enddate"
-													title="chọn ngày kết thúc tìm kiếm" maxlength="200">
-												</span>
-												
-										</form>
-								
 
 				
 							</div>
@@ -125,41 +96,34 @@
 										<thead>
 											<tr>
 												<th>STT</th>
-												<th>tài khoản</th>
-												<th>khách hàng</th>
-												<th>sản phẩm</th>
-												<th>sô lượng</th>
-												<th>thanh toán</th>
-												<th>giao hàng</th>
-												<th>giá sản phẩm</th>
-												<th>ngày đặt hàng</th>
+												<th>Đơn hàng số</th>
+												<th>Hình thức thanh toán</th>
+												<th>Hình thức giao hàng</th>
 												<th>trạng thái</th>
 
 											</tr>
 										</thead>
 										
-										<div th:if="${items}">
-											<tbody th:each="item,state : ${items}">
+										<div th:if="${orders}">
+											<tbody th:each="order,state : ${orders}">
 
 												<tr class="gradeU">
 													<td th:text="${state.index}+1"></td>
-													<td th:text="${item.cart.customer.account.username}"></td>
-													<td th:text="${item.cart.customer.fullname.firstname}"></td>
-													<td th:text="${item.product.name}"></td>
-													<td th:text="${item.amount}"></td>
-													<td th:text="${item.orders.payment.name}"></td>
-													<td th:text="${item.orders.shipment.name}"></td>
-													<td th:text="${#numbers.formatDecimal(item.product.salePrice, 0, 'COMMA', 0, 'POINT')}"></td>
-													<td th:text="${#dates.format(item.createDate, 'dd-MM-yyyy')}"></td>
-													
+													<td th:text="${order.id}"></td>
+													<td th:text="${order.payment.name}"></td>
+													<td th:text="${order.shipment.name}"></td>
 													<td>
-													<div th:if="${item.status}"><button class="btn btn-danger pull-center">đã xác nhận</button></div>
+													<div th:if="${order.status}"><button class="btn btn-danger pull-center">đã xác nhận</button></div>
 													
-													<div th:unless="${item.status}">
-													<a th:href=@{/sale/confirm(id=${item.id})}>
+													<div th:unless="${order.status}">
+													<a th:href=@{/sale/confirm(id=${order.id})}>
 													<button class="btn btn-primary pull-center">xác nhân</button>
 													</a>
 													</div>
+													
+													<a th:href=@{/sale/detail/orders(id=${order.id})}>
+													<button class="btn btn-primary pull-center">chi tiết</button>
+													</a>
 													</td>
 													
 												</tr>
