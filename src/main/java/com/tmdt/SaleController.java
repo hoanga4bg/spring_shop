@@ -46,6 +46,9 @@ public class SaleController {
 	@Autowired
 	private StoreDAO storeDAO;
 	
+	@Autowired 
+	private OrdersRepository ordersRepository;
+	
 	@Autowired
 	private OrderDAO orderDAO;
 
@@ -62,34 +65,28 @@ public class SaleController {
 	}
 	
 	
-//	@GetMapping("/detail")
-//	public String detailOrder(Model model) {
-//		List<ItemInCart> items = new ArrayList<ItemInCart>();
-//		List<Account> accounts = new ArrayList<Account>();
-//		accounts = accountRepository.findByRole("ROLE_USER");
-//		items = itemRepo.findAll();
-//		model.addAttribute("items", items);
-//		model.addAttribute("amount", items.size());
-//		model.addAttribute("accounts", accounts);
-//
-//		return "sale/display";
-//	}
+	@GetMapping("/detail")
+	public String detailOrder(Model model) {
+		List<Orders> orders = new ArrayList<Orders>();
+		orders = ordersRepository.findAll();
+		List<Account> accounts = new ArrayList<Account>();
+		accounts = accountRepository.findByRole("ROLE_USER");
+		double total = 0;
+		for (Orders order : orders) {
+			total += order.getTotalPrice();
+			
+		}
+		model.addAttribute("total",total);
+		
+		model.addAttribute("orders", orders);
+		model.addAttribute("amount", orders.size());
+		model.addAttribute("accounts", accounts);
+		model.addAttribute("status", 1);
+		
+
+		return "sale/index";
+	}
 	
-//	@GetMapping("/detail/orders")
-//	public String detail(Model model,@RequestParam("id") String id) {
-//		Orders orders = ordersRepository.findOneById(Long.parseLong(id));
-//		List<ItemInCart> items = new ArrayList<ItemInCart>();
-//		List<Account> accounts = new ArrayList<Account>();
-//		accounts = accountRepository.findByRole("ROLE_USER");
-//		items = itemRepo.findByOrders(orders);
-//		
-//		model.addAttribute("items", items);
-//		model.addAttribute("amount", items.size());
-//		model.addAttribute("accounts", accounts);
-//		
-//		return "sale/display";
-//	}
-//	
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
 		Orders order=orderDAO.findOneById(Long.parseLong(id));
@@ -113,31 +110,75 @@ public class SaleController {
 		return "redirect:/sale/info";
 	}
 	
-//	@GetMapping("/search")
-//	public String searchByDate(@RequestParam("startdate") String startdate,@RequestParam("enddate") String enddate,Model model) throws ParseException {
-//		if(startdate == "" || enddate == "") {
-//			return "redirect:/sale/detail";
-//		}
-//		
-//		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
-//		Date start;
-//		Date end;
-//		start = sim.parse(startdate);
-//		end = sim.parse(enddate);
-//		LocalDate day = end.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//		LocalDate day1 = day.plusDays(1);
-//		Date dateend = Date.from(day1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-//		
-//		List<ItemInCart> items = new ArrayList<ItemInCart>();
-//		List<Account> accounts = new ArrayList<Account>();
-//		accounts = accountRepository.findByRole("ROLE_USER");
-//		items = itemRepo.findByCreateDateBetween(start, dateend);
-//		
-//		model.addAttribute("items", items);
-//		model.addAttribute("amount", items.size());
-//		model.addAttribute("accounts", accounts);
-//		
-//		return "sale/display";
-//	}
+	@GetMapping("/searchacc")
+	public String searchByAccount(Model model,@RequestParam("id") String id) {
+		Account account = accountRepository.findOneById(Long.parseLong(id));
+		Customer customer = customerRepository.findByAccount(account);
+		Cart cart = cartRepository.findOneByCustomer(customer);
+		List<ItemInCart> items = new ArrayList<ItemInCart>();
+		items = itemRepo.findByCart(cart);
+		List<Orders> orders = new ArrayList<Orders>();
+		for (ItemInCart item : items) {
+			Orders order = ordersRepository.findByItem(item);
+			orders.add(order);
+		}
+		List<Account> accounts = new ArrayList<Account>();
+		accounts = accountRepository.findByRole("ROLE_USER");
+		
+		double total = 0;
+		for (Orders order : orders) {
+			total += order.getTotalPrice();
+			
+		}
+		model.addAttribute("total",total);
+		
+		model.addAttribute("orders", orders);
+		model.addAttribute("amount", orders.size());
+		model.addAttribute("accounts", accounts);
+		model.addAttribute("status", 1);
+		
+		return "sale/index";
+	}
+	
+	@GetMapping("/search")
+	public String searchByDate(@RequestParam("startdate") String startdate,@RequestParam("enddate") String enddate,Model model) throws ParseException {
+		if(startdate == "" || enddate == "") {
+			return "redirect:/sale/detail";
+		}
+		
+		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+		Date start;
+		Date end;
+		start = sim.parse(startdate);
+		end = sim.parse(enddate);
+		LocalDate day = end.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate day1 = day.plusDays(1);
+		Date dateend = Date.from(day1.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		
+		List<Account> accounts = new ArrayList<Account>();
+		accounts = accountRepository.findByRole("ROLE_USER");
+		List<Orders> orders = new ArrayList<Orders>();
+		orders = ordersRepository.findAll();
+		List<Orders> listOrders = new ArrayList<Orders>();
+		for (Orders order : orders) {
+			if(order.getItem().getCreateDate().compareTo(start) == 1 && order.getItem().getCreateDate().compareTo(dateend) == -1) {
+				listOrders.add(order);
+			}
+		}
+		
+		double total = 0;
+		for (Orders order : listOrders) {
+			total += order.getTotalPrice();
+			
+		}
+		model.addAttribute("total",total);
+		model.addAttribute("orders", listOrders);
+		model.addAttribute("amount", listOrders.size());
+		model.addAttribute("accounts", accounts);
+		model.addAttribute("status", 1);
+		
+		return "sale/index";
+	}
 
 }
