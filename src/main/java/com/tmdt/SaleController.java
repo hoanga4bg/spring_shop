@@ -60,36 +60,6 @@ public class SaleController {
 
 		return "sale/display";
 	}
-	
-	
-//	@GetMapping("/detail")
-//	public String detailOrder(Model model) {
-//		List<ItemInCart> items = new ArrayList<ItemInCart>();
-//		List<Account> accounts = new ArrayList<Account>();
-//		accounts = accountRepository.findByRole("ROLE_USER");
-//		items = itemRepo.findAll();
-//		model.addAttribute("items", items);
-//		model.addAttribute("amount", items.size());
-//		model.addAttribute("accounts", accounts);
-//
-//		return "sale/display";
-//	}
-	
-//	@GetMapping("/detail/orders")
-//	public String detail(Model model,@RequestParam("id") String id) {
-//		Orders orders = ordersRepository.findOneById(Long.parseLong(id));
-//		List<ItemInCart> items = new ArrayList<ItemInCart>();
-//		List<Account> accounts = new ArrayList<Account>();
-//		accounts = accountRepository.findByRole("ROLE_USER");
-//		items = itemRepo.findByOrders(orders);
-//		
-//		model.addAttribute("items", items);
-//		model.addAttribute("amount", items.size());
-//		model.addAttribute("accounts", accounts);
-//		
-//		return "sale/display";
-//	}
-//	
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
 		Orders order=orderDAO.findOneById(Long.parseLong(id));
@@ -112,32 +82,5 @@ public class SaleController {
 		accountRepository.save(account);
 		return "redirect:/sale/info";
 	}
-	
-//	@GetMapping("/search")
-//	public String searchByDate(@RequestParam("startdate") String startdate,@RequestParam("enddate") String enddate,Model model) throws ParseException {
-//		if(startdate == "" || enddate == "") {
-//			return "redirect:/sale/detail";
-//		}
-//		
-//		SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
-//		Date start;
-//		Date end;
-//		start = sim.parse(startdate);
-//		end = sim.parse(enddate);
-//		LocalDate day = end.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//		LocalDate day1 = day.plusDays(1);
-//		Date dateend = Date.from(day1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-//		
-//		List<ItemInCart> items = new ArrayList<ItemInCart>();
-//		List<Account> accounts = new ArrayList<Account>();
-//		accounts = accountRepository.findByRole("ROLE_USER");
-//		items = itemRepo.findByCreateDateBetween(start, dateend);
-//		
-//		model.addAttribute("items", items);
-//		model.addAttribute("amount", items.size());
-//		model.addAttribute("accounts", accounts);
-//		
-//		return "sale/display";
-//	}
 
 }
