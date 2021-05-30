@@ -97,6 +97,11 @@
 											<tr>
 												<th>STT</th>
 												<th>Đơn hàng số</th>
+												<th>Sản phẩm</th>
+												<th>Tổng thanh toán</th>
+												<th>Ngày đặt hàng</th>
+												<th>Địa chỉ nhận hàng</th>
+												<th>Số điện thoại nhận hàng</th>
 												<th>Hình thức thanh toán</th>
 												<th>Hình thức giao hàng</th>
 												<th>trạng thái</th>
@@ -110,6 +115,11 @@
 												<tr class="gradeU">
 													<td th:text="${state.index}+1"></td>
 													<td th:text="${order.id}"></td>
+													<td th:text="${order.item.product.name}"></td>
+													<td th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}"></td>
+													<td th:text="${#dates.format(order.item.createDate, 'dd-MM-yyyy')}"></td>
+													<td th:text="${order.address}"></td>
+													<td th:text="${order.phone}"></td>
 													<td th:text="${order.payment.name}"></td>
 													<td th:text="${order.shipment.name}"></td>
 													<td>
@@ -121,9 +131,6 @@
 													</a>
 													</div>
 													
-													<a th:href=@{/sale/detail/orders(id=${order.id})}>
-													<button class="btn btn-primary pull-center">chi tiết</button>
-													</a>
 													</td>
 													
 												</tr>
