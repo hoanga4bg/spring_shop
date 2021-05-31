@@ -24,6 +24,7 @@ public class Orders {
 	private double totalPrice;
 	private String address;
 	private String phone;
+	private boolean statusStore;
 	@OneToOne
 	@JoinColumn(name = "item_id")
 	private ItemInCart item;

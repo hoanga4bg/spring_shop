@@ -9,11 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tmdt.business.OrderDAO;
 import com.tmdt.business.StoreDAO;
 import com.tmdt.model.Account;
+import com.tmdt.model.ItemInCart;
+import com.tmdt.model.Orders;
 import com.tmdt.model.Product;
 import com.tmdt.repository.AccountRepository;
+import com.tmdt.repository.OrdersRepository;
 import com.tmdt.repository.ProductRepository;
 
 @Controller
@@ -28,6 +33,12 @@ public class StoreController {
 	
 	@Autowired
 	private AccountRepository accountRepo;
+	
+	@Autowired
+	private OrderDAO orderDAO;
+	
+	@Autowired
+	private OrdersRepository ordersRepo;
 	
 	@GetMapping
 	public String store(Model model) {
@@ -50,6 +61,37 @@ public class StoreController {
 	public String saveAccount(Account account) {
 		accountRepo.save(account);
 		return "redirect:/store/info";
+	}
+	
+	@GetMapping("/order")
+	public String update(Model model) {
+		List<Orders> orders =ordersRepo.findByStatusAndStatusStore(true, false);
+
+		model.addAttribute("orders", orders);
+		model.addAttribute("amount", orders.size());
+		return "store/order";
+	}
+	
+	@GetMapping("/confirm")
+	public String confirm(@RequestParam("id") String id) {
+		Orders order=orderDAO.findOneById(Long.parseLong(id));
+		order.setStatusStore(true);
+		ItemInCart item = order.getItem();
+		Product product = item.getProduct();
+		product.setAmount(product.getAmount() - item.getAmount());
+		productRepository.save(product);
+		orderDAO.save(order);
+		return "redirect:/store/order";
+	}
+	
+	@GetMapping("/thongke")
+	public String thongke(Model model) {
+		List<Orders> orders =ordersRepo.findByStatusAndStatusStore(true, true);
+
+		model.addAttribute("orders", orders);
+		model.addAttribute("amount", orders.size());
+		model.addAttribute("status", 1);
+		return "store/order";
 	}
 
 }

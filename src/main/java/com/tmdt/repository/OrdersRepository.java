@@ -15,5 +15,7 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 	public List<Orders> findByStatus(boolean b);
 
 	public Orders findByItem(ItemInCart item);
+	
+	public List<Orders> findByStatusAndStatusStore(boolean status, boolean statusStore);
 
 }
