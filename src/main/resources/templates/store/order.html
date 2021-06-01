@@ -111,13 +111,21 @@
 													<td th:text="${order.payment.name}"></td>
 													<td th:text="${order.shipment.name}"></td>
 													<td>
-													<div th:if="${order.statusStore}"><button class="btn btn-danger pull-center">đã xác nhận</button></div>
+													<div th:switch="${order.status}">
 													
-													<div th:unless="${order.statusStore}">
+													<div th:case="1">
 													<a th:href=@{/store/confirm(id=${order.id})}>
 													<button class="btn btn-primary pull-center">xác nhân</button>
 													</a>
 													</div>
+													
+													<div th:case="2"><button class="btn btn-danger pull-center">đã xác nhận lấy hàng</button></div>
+													
+													
+													</div>
+													
+													
+													
 													
 													</td>
 													

@@ -65,7 +65,7 @@ public class StoreController {
 	
 	@GetMapping("/order")
 	public String update(Model model) {
-		List<Orders> orders =ordersRepo.findByStatusAndStatusStore(true, false);
+		List<Orders> orders =ordersRepo.findByStatus(1);
 
 		model.addAttribute("orders", orders);
 		model.addAttribute("amount", orders.size());
@@ -75,7 +75,7 @@ public class StoreController {
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
 		Orders order=orderDAO.findOneById(Long.parseLong(id));
-		order.setStatusStore(true);
+		order.setStatus(2);
 		ItemInCart item = order.getItem();
 		Product product = item.getProduct();
 		product.setAmount(product.getAmount() - item.getAmount());
@@ -86,7 +86,7 @@ public class StoreController {
 	
 	@GetMapping("/thongke")
 	public String thongke(Model model) {
-		List<Orders> orders =ordersRepo.findByStatusAndStatusStore(true, true);
+		List<Orders> orders =ordersRepo.findByStatus(2);
 
 		model.addAttribute("orders", orders);
 		model.addAttribute("amount", orders.size());

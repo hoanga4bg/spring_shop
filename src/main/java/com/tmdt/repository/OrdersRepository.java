@@ -12,10 +12,10 @@ public interface OrdersRepository extends JpaRepository<Orders, Long>{
 
 	public Orders findOneById(long id);
 
-	public List<Orders> findByStatus(boolean b);
+	public List<Orders> findByStatus(int status);
 
 	public Orders findByItem(ItemInCart item);
 	
-	public List<Orders> findByStatusAndStatusStore(boolean status, boolean statusStore);
+	
 
 }

@@ -20,11 +20,11 @@ public class Orders {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private boolean status;
+	private int status;
 	private double totalPrice;
 	private String address;
 	private String phone;
-	private boolean statusStore;
+	
 	@OneToOne
 	@JoinColumn(name = "item_id")
 	private ItemInCart item;

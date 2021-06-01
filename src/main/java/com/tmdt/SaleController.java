@@ -92,7 +92,7 @@ public class SaleController {
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam("id") String id) {
 		Orders order=orderDAO.findOneById(Long.parseLong(id));
-		order.setStatus(true);
+		order.setStatus(1);
 		orderDAO.save(order);
 
 		return "redirect:/sale";

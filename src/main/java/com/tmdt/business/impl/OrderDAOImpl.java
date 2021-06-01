@@ -23,7 +23,7 @@ public class OrderDAOImpl implements OrderDAO{
 	@Override
 	public List<Orders> findAll() {
 		
-		return orderRepo.findByStatus(false);
+		return orderRepo.findByStatus(0);
 	}
 
 	@Override

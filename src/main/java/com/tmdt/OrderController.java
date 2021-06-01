@@ -51,7 +51,7 @@ public class OrderController {
 			Orders o=new Orders();
 			o.setItem(item);
 			o.setTotalPrice(item.getAmount()*item.getProduct().getSalePrice()*(1-item.getProduct().getSaleOff()));
-			o.setStatus(false);
+			o.setStatus(0);
 			o.setAddress(address);
 			o.setShipment(ship);
 			o.setPayment(pay);
