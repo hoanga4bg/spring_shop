@@ -68,6 +68,7 @@ public class OrderController {
 		Cart cart=cartDAO.getCart();
 		List<Orders> list=orderDAO.findByCart(cart);
 		Collections.reverse(list);
+		System.out.print(list.get(0).getItem().getProduct().getName());
 		model.addAttribute("list", list);
 		return "history";
 	}
